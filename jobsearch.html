@@ -1,0 +1,95 @@
+<ion-view title="Jobs" cache-view="false" id="jobsearchmain"  hide-nav-bar="false" has-header="true">
+    <!--    <ion-nav-bar  align-title="left">
+                
+            </ion-nav-bar>-->
+    <ion-nav-bar class="bar-stable">
+        <ion-nav-back-button></ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <!--<button ng-click="sortJobs()" class="button button-icon button-clear"><i class="icon ion-arrow-swap" style="display: inline-block; transform: rotate(90deg);color:#fff;margin-left: 12px;font-size: 25px;"></i></button>-->
+            <!--                    <button ng-click="openPopoversearch($event)" class="button button-icon button-clear ion-search rt_btn_hdr in_search" menu-toggle="right">
+                                </button>-->
+            <button ng-click="openPopover($event)" class="button button-icon button-clear ion-android-more-vertical rt_btn_hdr" menu-toggle="right">
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <div class="bar bar-header header_search_sec bar-subheader">
+        <div class="search_section_top">
+            <div class="sort_user" style="float: left;color: #fff;font-size: 22px;width: 31%;"><span style="margin-top: 6px;display: inline-block;">Sort</span><button ng-click="sortJobs()" class="button button-clear"><i class="icon ion-arrow-swap" style="display: inline-block; transform: rotate(90deg);color:#fff;margin-left: 12px;font-size: 25px;"></i></button></div>
+            <input type="text" class="qualification" ng-model="searchText" placeholder="Enter keyword" />
+            <!--<button type="submit" class="go_btn">Go</button>-->
+        </div>
+    </div>
+
+
+    <ion-content padding="false" class="has-header job_search_outer">
+        <ion-refresher
+            on-refresh="doRefresh()">
+        </ion-refresher>
+        <div class="job_lists job_ser_list">
+            <div class="card" ng-repeat="job in  filteredJobs = (jobs| filter: searchText| filter : { location : job_location } | orderBy: sortby)" >
+                <!--<div class="card" ng-repeat="job in  filteredJobs = (jobs| filter: { location : sjob_loc,experince : sexperince,qualification : squalific ,job_code : sjob_code ,job_title : sjob_title } | filter: { salary: smin_salary }:greaterThan | orderBy: sortby)" >-->
+                <div class="item item-text-wrap">
+                    <div class="row">
+                        <div class="col col-90" ng-click="loadSinleJob(job.job_id, job, job.index)"> 
+                            <h2 class="jobtitle">{{job.job_title}}</h2>
+                            <span class="company_name" ng-if="job.company === 'undefined' || job.company === ''">{{job.location}}<label ng-if="job.job_place !== 'undefined' && job.job_place !== '' && job.job_place !== null"> - {{job.job_place}}</label></span>
+                            <span class="company_name" ng-if="job.company !== 'undefined' && job.company !== ''">{{job.company}} - {{job.location}}<label ng-if="job.job_place !== 'undefined' && job.job_place !== '' && job.job_place !== null"> - {{job.job_place}}</label></span>
+                            <div class="sal_job_type">
+                                <span class="salary" ng-if="job.salary === 0" >&nbsp; Salary Not Specified</span>
+                                <span class="salary" ng-if="job.salary !== 0" >{{job.salary}} Per Month  </span>
+                                <span ng-class="{ 'job_type_full': job.job_type === 'Full Time' , 'job_type_part': job.job_type === 'Part Time'  }" class="">{{job.job_type}}</span>
+                            </div> <a ng-if="!job.applied" ng-click="loadApply($event, job.job_id, job.index)" class="apply_now">Apply Now</a>
+                            <span ng-if="job.applied" class="apply_now"><i class="icon ion-checkmark-round"></i>Applied</span>
+                        </div>
+                        <div class="col" ng-click="addFav(job.job_id, job.index, job.favorite)"><i ng-class="{ 'ion-android-favorite-outline' : job.favorite === null , 'ion-android-favorite fa_fill_ic' : job.favorite !== null}"  class="icon fav_icon"></i></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="job_lists job_ser_list" ng-hide="(jobs|filter: searchText | filter : { location : job_location }  ).length > 0 || ajaxstarted === 1">
+            <h2 class="notfound">
+                <i class="ion-ios-search-strong ion searchfound"></i> 
+                Search Not Found
+            </h2>
+        </div>
+        <ion-infinite-scroll ng-if="finished !== 'finished'"
+                             on-infinite="loadMore()"
+                             distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+    <div class="bar bar-footer bar-bottom">
+        <div class="buttons">
+            <button class="btn1_home" ng-click="$root.navigateto('menu.search')">
+                <!--<i class="icon ion-home"></i>-->
+                <img src="./img/home.png">
+                <span>Home</span>
+            </button>
+        </div>
+        <div class="buttons">
+            <button class="btn1_jobs" ng-click="$root.navigateto('menu.jobsearch')">
+                <img src="./img/jobs.png">
+                <span>Job</span>
+            </button>
+        </div>
+        <div class="buttons">
+            <button class="btn1_applied" ng-click="$root.navigateto('menu.appliedjob')"> 
+                <img src="./img/applied.png"><span>Applied</span>
+            </button>
+        </div>
+        <div class="buttons" ng-click="$root.navigateto('menu.profile')">
+            <button class="btn1_profile"> <img src="./img/mypro.png"><span>Profile
+                </span></button>
+        </div>
+        <div class="buttons exclusive_btn" ng-click="$root.navigateto('menu.exclusive')">
+            <button class="btn1_profile"> <img src="./img/exc.png"><span>Exclusives
+                </span></button>
+        </div>
+    </div>
+
+
+</ion-view>

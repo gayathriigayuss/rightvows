@@ -1,0 +1,119 @@
+<ion-view title="Products" id="CartPage"  hide-nav-bar="false" has-header="true">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+    <ion-content padding="true" class="has-header job_search_outer cart_outer">
+        <form name="cart_form">
+
+            <div class="cartmain">
+                <div class="item item-text-wrap cart">
+                    <div class="row"> 
+                        <div class="col col-80 bor_dashed">    
+
+                            <div class="cart_fields">
+                                <ion-checkbox ng-model="cart.mandatory"  class="checkbox-square" ng-change="calcTotal(cart)">
+                                    <h4 class="cart_hd">Mandatory Documents</h4>
+                                    <p>
+                                        Lorem Ipsum is simply dummy text of 
+                                        the printing and typesetting industry. 
+                                    </p>
+                                </ion-checkbox>                               
+                            </div>
+
+                        </div>
+                        <div class="col col-20 bor_btm price_cr_sec">    
+                            <h3 class="price_cart"><i class="ion ion-social-usd"></i>10</h3>
+                        </div>
+                    </div> 
+                    <div class="row"> 
+                        <div class="col col-80 bor_dashed">    
+
+                            <div class="cart_fields">
+                                <ion-checkbox ng-model="cart.coverletter" class="checkbox-square" ng-change="calcTotal(cart)">
+                                    <h4  class="cart_hd">Cover Letter</h4>
+                                    <p>
+                                        Lorem Ipsum is simply dummy text of 
+                                        the printing and typesetting industry. 
+                                    </p>
+                                </ion-checkbox>                               
+                            </div>
+
+                        </div>
+                        <div class="col col-20 bor_btm price_cr_sec">    
+                            <h3 class="price_cart"><i class="ion ion-social-usd"></i>5</h3>
+                        </div>
+                    </div> 
+                    <div class="row"> 
+                        <div class="col col-80 bor_dashed">    
+
+                            <div class="cart_fields">
+                                <ion-checkbox ng-model="cart.resume"  class="checkbox-square" ng-change="calcTotal(cart)">
+                                    <h4  class="cart_hd">Resume</h4>
+                                    <p>
+                                        Lorem Ipsum is simply dummy text of 
+                                        the printing and typesetting industry. 
+                                    </p>
+                                </ion-checkbox>                               
+                            </div>
+
+                        </div>
+                        <div class="col col-20 bor_btm price_cr_sec">    
+                            <h3 class="price_cart"><i class="ion ion-social-usd"></i>7</h3>
+                        </div>
+                    </div> 
+
+
+
+                </div>
+                <div class="row bornone"> 
+                    <div class="col col-75">    
+
+                        <h2 class="cart_ttl">Total</h2>
+                    </div>
+                    <div class="col col-25 price_cr_sec_last">    
+                        <h3 class="price_cart pricetotal"><i class="ion ion-social-usd"></i>{{total}}</h3>
+                    </div>
+                </div> 
+                <div class="item item-text-wrap bor_top">
+                    <div class="row"> 
+                        <div class="col">    
+                            <button class="btn_proceed button" ng-click="procceedToCheckout(cart)">
+                                Proceed
+                            </button>
+
+
+                        </div>
+
+                    </div> 
+                </div>
+            </div>
+        </form>
+    </ion-content>
+    <div class="bar bar-footer bar-bottom">
+        <div class="buttons">
+            <button class="btn1_home" ng-click="$root.navigateto('menu.search')">
+                <!--<i class="icon ion-home"></i>-->
+                <img src="./img/home.png">
+                <span>Home</span>
+            </button>
+        </div>
+        <div class="buttons">
+            <button class="btn1_jobs" ng-click="$root.navigateto('menu.jobsearch')">
+                <img src="./img/jobs.png">
+                <span>Job</span>
+            </button>
+        </div>
+        <div class="buttons">
+            <button class="btn1_applied" ng-click="$root.navigateto('menu.appliedjob')"> 
+                <img src="./img/applied.png"><span>Applied</span>
+            </button>
+        </div>
+        <div class="buttons" ng-click="$root.navigateto('menu.profile')">
+            <button class="btn1_profile"> <img src="./img/mypro.png"><span>Profile
+                </span></button>
+        </div>
+        <div class="buttons" ng-click="$root.navigateto('menu.profile')">
+            <button class="btn1_profile"> <img src="./img/exc.png"><span>Exclusives
+                </span></button>
+        </div>
+    </div>
+</ion-view>
